@@ -22,6 +22,56 @@ public class Arbol {
 	public Arbol() {
 		
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setNombreComun(String nombreComun) {
+		this.nombreComun = nombreComun;
+	}
+
+	public void setNombreCientifico(String nombreCientifico) {
+		this.nombreCientifico = nombreCientifico;
+	}
+
+	public void setHabitat(String habitat) {
+		this.habitat = habitat;
+	}
+
+	public void setAltura(int altura) {
+		this.altura = altura;
+	}
+
+	public void setOrigen(String origen) {
+		this.origen = origen;
+	}
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public String getNombreComun() {
+		return nombreComun;
+	}
+
+	public String getNombreCientifico() {
+		return nombreCientifico;
+	}
+
+	public String getHabitat() {
+		return habitat;
+	}
+
+	public int getAltura() {
+		return altura;
+	}
+
+	public String getOrigen() {
+		return origen;
+	}
+	
 	
 	
 }
