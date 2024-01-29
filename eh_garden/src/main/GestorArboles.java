@@ -37,10 +37,12 @@ public class GestorArboles {
 			
 			switch (intro) {
 			case SELECT:
-				
+				//conectarse a la base de datos y introduce los arboles a la arraylist
+				//devuelve la arraylis(foreach)
 				break;
 			case INSERT:
-				
+				//metodo que pide datos y crea un arbol
+				//metodo que inserta en base de datos 
 				break;
 			case UPDATE:
 				
@@ -58,11 +60,15 @@ public class GestorArboles {
 			}
 		} while (intro == 0);
 
+	}
+
+	private static void visualizarArboles(ArrayList<Arbol> arboles) {
+		// TODO Auto-generated method stub
 		
-		
-		
-		
-		
+	}
+
+	private static void arboles() {
+		// TODO Auto-generated method stub
 		
 	}
 
