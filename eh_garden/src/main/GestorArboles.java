@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,9 +44,8 @@ public class GestorArboles {
 			switch (intro) {
 			case VER_TODOS:
 				//conectarse a la base de datos y introduce los arboles a la arraylist
-				arboles();
 				//devuelve la arraylis(foreach)
-				visualizarArboles(arboles);
+				visualizarArboles(arboles());
 				break;
 			case INSERT:
 				//metodo que pide datos y crea un arbol
@@ -85,9 +85,11 @@ public class GestorArboles {
 			
 			String sql = "select * from arboles";
 			
-			PreparedStatement ps = conexion.prepareStatement(sql);
+			Statement st = conexion.createStatement();
 			
-			ResultSet rs = ps.executeQuery(sql);
+			st.execute(sql);
+			
+			ResultSet rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
 				Arbol a = new Arbol();
