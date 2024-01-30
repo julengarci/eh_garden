@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import clases.Arbol;
-import clases.Tarea;
 
 public class GestorArboles {
 
@@ -82,9 +81,9 @@ public class GestorArboles {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestorArboles","root","");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
 			
-			String sql = "select * from tareas";
+			String sql = "select * from arboles";
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			
