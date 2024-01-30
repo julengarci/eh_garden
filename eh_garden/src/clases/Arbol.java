@@ -71,6 +71,14 @@ public class Arbol {
 	public String getOrigen() {
 		return origen;
 	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", nombreComun=" + nombreComun + ", nombreCientifico=" + nombreCientifico + ", habitat="
+				+ habitat + ", altura=" + altura + ", origen=" + origen;
+	}
+	
+	
 	
 	
 	

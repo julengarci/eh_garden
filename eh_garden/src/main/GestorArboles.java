@@ -1,9 +1,15 @@
 package main;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import clases.Arbol;
+import clases.Tarea;
 
 public class GestorArboles {
 
@@ -18,7 +24,7 @@ public class GestorArboles {
 
 		ArrayList<Arbol> arboles = new ArrayList<Arbol>();
 		
-		final int SELECT = 1;
+		final int VER_TODOS = 1;
 		final int INSERT = 2;
 		final int UPDATE = 3;
 		final int DELETE = 4;
@@ -28,7 +34,7 @@ public class GestorArboles {
 		
 		do {
 			System.out.println("---MENU---");
-			System.out.println(SELECT + " - Mostrar por pantalla");
+			System.out.println(VER_TODOS + " - Mostrar todos por pantalla");
 			System.out.println(INSERT + " - Insertar tupla");
 			System.out.println(UPDATE + " - Actueñizar tupla");
 			System.out.println(DELETE + " - Eliminar tupla");
@@ -36,9 +42,11 @@ public class GestorArboles {
 			intro = Integer.parseInt(scan.nextLine());
 			
 			switch (intro) {
-			case SELECT:
+			case VER_TODOS:
 				//conectarse a la base de datos y introduce los arboles a la arraylist
+				arboles();
 				//devuelve la arraylis(foreach)
+				visualizarArboles(arboles);
 				break;
 			case INSERT:
 				//metodo que pide datos y crea un arbol
@@ -63,13 +71,46 @@ public class GestorArboles {
 	}
 
 	private static void visualizarArboles(ArrayList<Arbol> arboles) {
-		// TODO Auto-generated method stub
+		for (Arbol arbol : arboles) {
+			System.out.println(arbol);
+		}
 		
 	}
 
-	private static void arboles() {
-		// TODO Auto-generated method stub
+	private static ArrayList<Arbol> arboles() {
+		ArrayList<Arbol> arboles = new ArrayList<Arbol>();
 		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestorArboles","root","");
+			
+			String sql = "select * from tareas";
+			
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery(sql);
+			
+			while(rs.next()) {
+				Arbol a = new Arbol();
+				
+				a.setId(rs.getInt(1));
+				a.setNombreComun(rs.getString(2));
+				a.setNombreCientifico(rs.getString(3));
+				a.setHabitat(rs.getString(4));
+				a.setAltura(rs.getInt(5));
+				a.setOrigen(rs.getString(6));
+				
+				arboles.add(a);
+			}
+			
+			
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return arboles;
 	}
 
 }
