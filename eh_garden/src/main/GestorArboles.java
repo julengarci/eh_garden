@@ -75,12 +75,11 @@ public class GestorArboles {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestor_tareas","root","");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
 			
 			Statement st = conexion.createStatement();
 			
-			String sql = "INSERT INTO arboles(nombre_comun,nombre_cientifico, habitat, altura, origen) VALUES (?,?,?,?,?);";
-			st.execute(sql);
+			String sql = "INSERT INTO arboles(nombre_comun,nombre_cientifico, habitat, altura, origen) VALUES ( ? , ? , ? , ? , ? );";
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setString(1,arbol.getNombreComun());
 			ps.setString(2,arbol.getNombreCientifico());
