@@ -50,6 +50,7 @@ public class GestorArboles {
 			case INSERT:
 				//metodo que pide datos y crea un arbol
 				//metodo que inserta en base de datos 
+				insert(crearArbol());
 				break;
 			case UPDATE:
 				
@@ -67,6 +68,56 @@ public class GestorArboles {
 			}
 		} while (intro == 0);
 
+	}
+
+	private static void insert(Arbol arbol) {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestor_tareas","root","");
+			
+			Statement st = conexion.createStatement();
+			
+			String sql = "INSERT INTO arboles(nombre_comun,nombre_cientifico, habitat, altura, origen) VALUES (?,?,?,?,?);";
+			st.execute(sql);
+			PreparedStatement ps = conexion.prepareStatement(sql);
+			ps.setString(1,arbol.getNombreComun());
+			ps.setString(2,arbol.getNombreCientifico());
+			ps.setString(3, arbol.getHabitat());
+			ps.setInt(4,arbol.getAltura());
+			ps.setString(5, arbol.getOrigen());
+			
+			ps.execute();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+	}
+
+	private static Arbol crearArbol() {
+		Scanner scan = new Scanner(System.in);
+		
+		Arbol a = new Arbol();
+		
+		System.out.println("introduce el nombre comun del arbol :");
+		a.setNombreComun(scan.nextLine());
+		System.out.println("introduce el nombre cientifico");
+		a.setNombreCientifico(scan.nextLine());
+		System.out.println("introduce el habitat");
+		a.setHabitat(scan.nextLine());
+		System.out.println("introduce la altura");
+		a.setAltura(Integer.parseInt(scan.nextLine()));
+		System.out.println("introduce el origen");
+		a.setOrigen(scan.nextLine());
+		
+		return a;
 	}
 
 	private static void visualizarArboles(ArrayList<Arbol> arboles) {
