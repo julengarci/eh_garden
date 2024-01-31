@@ -10,11 +10,11 @@ public class Arbol {
 	private Habitat habitat;
 	private int altura;
 	private String origen;
-	private Date encontrado;
+	private String encontrado;
 	private Boolean singular;
 	
 	public Arbol(int id, String nombreComun, String nombreCientifico, Habitat habitat, int altura, String origen,
-			Date encontrado, Boolean singular) {
+			String encontrado, Boolean singular) {
 		super();
 		this.id = id;
 		this.nombreComun = nombreComun;
@@ -54,7 +54,7 @@ public class Arbol {
 		this.origen = origen;
 	}
 	
-	public void setEncontrado(Date encontrado) {
+	public void setEncontrado(String encontrado) {
 		this.encontrado = encontrado;
 	}
 
@@ -89,7 +89,7 @@ public class Arbol {
 		return origen;
 	}
 	
-	public Date getEncontrado() {
+	public String getEncontrado() {
 		return encontrado;
 	}
 
