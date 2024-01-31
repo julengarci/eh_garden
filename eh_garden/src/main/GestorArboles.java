@@ -88,7 +88,7 @@ public class GestorArboles {
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestor_tareas","root","");
 			
 			Statement st = conexion.createStatement();
-			String sql = "delete from tareas where id = ? ";
+			String sql = "delete from arboles where id = ? ";
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setInt(1,arbol.getId());
