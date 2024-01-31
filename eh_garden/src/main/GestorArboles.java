@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import clases.Arbol;
+import clases.Habitat;
 
 public class GestorArboles {
 
@@ -166,7 +167,7 @@ public class GestorArboles {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
 			
-			String sql = "select * from arboles";
+			String sql = "SELECT * FROM arboles inner JOIN habitats on arboles.id_habitat = habitats.id;";
 			
 			Statement st = conexion.createStatement();
 			
@@ -180,9 +181,16 @@ public class GestorArboles {
 				a.setId(rs.getInt(1));
 				a.setNombreComun(rs.getString(2));
 				a.setNombreCientifico(rs.getString(3));
-				a.setHabitat(rs.getString(4));
 				a.setAltura(rs.getInt(5));
 				a.setOrigen(rs.getString(6));
+				a.setEncontrado(rs.getDate(7));
+				a.setSingular(rs.getBoolean(8));
+				
+				Habitat h = new Habitat();
+				h.setId(rs.getInt(9));
+				h.setNombre(rs.getString(10));
+				
+				a.setHabitat(h);
 				
 				arboles.add(a);
 			}
