@@ -89,13 +89,7 @@ public class Arbol {
 		return origen;
 	}
 	
-	public String getEncontrado() {
-		return encontrado;
-	}
-
-	public Boolean getSingular() {
-		return singular;
-	}
+	
 
 	@Override
 	public String toString() {
