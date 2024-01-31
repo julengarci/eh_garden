@@ -1,15 +1,20 @@
 package clases;
 
+import java.util.Date;
+
 public class Arbol {
 
 	private int id;
 	private String nombreComun;
 	private String nombreCientifico;
-	private String habitat;
+	private Habitat habitat;
 	private int altura;
 	private String origen;
+	private Date encontrado;
+	private Boolean singular;
 	
-	public Arbol(int id, String nombreComun, String nombreCientifico, String habitat, int altura, String origen) {
+	public Arbol(int id, String nombreComun, String nombreCientifico, Habitat habitat, int altura, String origen,
+			Date encontrado, Boolean singular) {
 		super();
 		this.id = id;
 		this.nombreComun = nombreComun;
@@ -17,8 +22,10 @@ public class Arbol {
 		this.habitat = habitat;
 		this.altura = altura;
 		this.origen = origen;
+		this.encontrado = encontrado;
+		this.singular = singular;
 	}
-	
+
 	public Arbol() {
 		
 	}
@@ -35,7 +42,7 @@ public class Arbol {
 		this.nombreCientifico = nombreCientifico;
 	}
 
-	public void setHabitat(String habitat) {
+	public void setHabitat(Habitat habitat) {
 		this.habitat = habitat;
 	}
 
@@ -60,7 +67,7 @@ public class Arbol {
 		return nombreCientifico;
 	}
 
-	public String getHabitat() {
+	public Habitat getHabitat() {
 		return habitat;
 	}
 
