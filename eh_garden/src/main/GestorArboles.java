@@ -82,16 +82,18 @@ public class GestorArboles {
 
 	private static void delete(Arbol arbol) {
 		
+		Scanner scan = new Scanner(System.in);
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestor_tareas","root","");
 			
 			Statement st = conexion.createStatement();
-			String sql = "delete from arboles where id = ? ";
+			String sql = "DELETE FROM arboles WHERE id = ?";
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
-			ps.setInt(1,arbol.getId());
+			ps.setInt(1,Integer.parseInt(scan.nextLine()));
 			
 			st.execute(sql);
 			
