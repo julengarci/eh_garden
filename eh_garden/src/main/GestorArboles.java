@@ -165,7 +165,7 @@ public class GestorArboles {
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden2","root","");
 			
 			String sql = "SELECT * FROM arboles inner JOIN habitats on arboles.id_habitat = habitats.id;";
 			
