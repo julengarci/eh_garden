@@ -110,13 +110,15 @@ public class GestorArboles {
 			
 			Statement st = conexion.createStatement();
 			
-			String sql = "INSERT INTO arboles(nombre_comun,nombre_cientifico, habitat, altura, origen) VALUES ( ? , ? , ? , ? , ? );";
+			String sql = "INSERT INTO arboles(nombre_comun,nombre_cientifico,id_habitat,altura,origen,encontrado,singular) VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			ps.setString(1,arbol.getNombreComun());
 			ps.setString(2,arbol.getNombreCientifico());
-			ps.setString(3, arbol.getHabitat());
+//			ps.setString(3, arbol.getId());
 			ps.setInt(4,arbol.getAltura());
 			ps.setString(5, arbol.getOrigen());
+			ps.setDate(6, arbol.getEncontrado());
+			ps.setBoolean(7, arbol.getSingular());
 			
 			ps.execute();
 			
@@ -125,10 +127,7 @@ public class GestorArboles {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 	}
 
 	private static Arbol crearArbol() {
@@ -140,14 +139,21 @@ public class GestorArboles {
 		a.setNombreComun(scan.nextLine());
 		System.out.println("introduce el nombre cientifico");
 		a.setNombreCientifico(scan.nextLine());
-		System.out.println("introduce el id habitat");
+		
 		Habitat h = new Habitat();
-		h.setId(0);
+		System.out.println("introduce el id habitat");
+		h.setId(Integer.parseInt(scan.nextLine()));
+		h.setNombre("euskadi");
+		
 		System.out.println("introduce la altura");
 		a.setAltura(Integer.parseInt(scan.nextLine()));
 		System.out.println("introduce el origen");
 		a.setOrigen(scan.nextLine());
+		System.out.println("indroduce la fecha de encuentro ( yyyy/MM/dd )");
 		a.setEncontrado(Date.valueOf(scan.nextLine()));
+		System.out.println("indroduce si es singular");
+		a.setSingular(scan.nextBoolean());
+		
 		return a;
 	}
 
