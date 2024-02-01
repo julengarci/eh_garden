@@ -183,7 +183,7 @@ public class GestorArboles {
 				a.setNombreCientifico(rs.getString(3));
 				a.setAltura(rs.getInt(5));
 				a.setOrigen(rs.getString(6));
-				a.setEncontrado(rs.getString(7));
+				a.setEncontrado(rs.getDate(7));
 				a.setSingular(rs.getBoolean(8));
 				
 				Habitat h = new Habitat();
