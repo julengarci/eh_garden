@@ -108,13 +108,12 @@ public class GestorArboles {
 			
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
 			
-			Statement st = conexion.createStatement();
-			
 			String sql = "INSERT INTO arboles(nombre_comun,nombre_cientifico,id_habitat,altura,origen,encontrado,singular) VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement ps = conexion.prepareStatement(sql);
+			
 			ps.setString(1,arbol.getNombreComun());
 			ps.setString(2,arbol.getNombreCientifico());
-//			ps.setString(3, arbol.getId());
+			ps.setInt(3, arbol.getHabitat().getId());
 			ps.setInt(4,arbol.getAltura());
 			ps.setString(5, arbol.getOrigen());
 			ps.setDate(6, arbol.getEncontrado());
@@ -144,6 +143,8 @@ public class GestorArboles {
 		System.out.println("introduce el id habitat");
 		h.setId(Integer.parseInt(scan.nextLine()));
 		h.setNombre("euskadi");
+		
+		a.setHabitat(h);
 		
 		System.out.println("introduce la altura");
 		a.setAltura(Integer.parseInt(scan.nextLine()));
