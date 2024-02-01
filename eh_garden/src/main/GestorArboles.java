@@ -1,11 +1,13 @@
 package main;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -59,7 +61,8 @@ public class GestorArboles {
 			case DELETE:
 				//metodo que pida id y devuelva el arbol si existe
 				//metodo que conecta a la base de datos y elimina
-				delete(buscarUno());
+				visualizarArboles(arboles());
+				delete();
 				break;
 				
 			case SALIR:
@@ -73,34 +76,28 @@ public class GestorArboles {
 
 	}
 
-	private static Arbol buscarUno() {
-		Arbol a = new Arbol();
+	private static void delete() {
 		
-		
-		return a;
-	}
-
-	private static void delete(Arbol arbol) {
-		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("introduce el id para eliminar: ");
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestor_tareas","root","");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden2","root","");
 			
-			Statement st = conexion.createStatement();
-			String sql = "delete from tareas where id = ? ";
+			String sql = "DELETE FROM arboles WHERE id = ?";
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
-			ps.setInt(1,arbol.getId());
 			
-			st.execute(sql);
+			ps.setInt(1,Integer.parseInt(scan.nextLine()));
+			
+			ps.execute();
+			conexion.close();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		}
 	}
 
@@ -143,13 +140,14 @@ public class GestorArboles {
 		a.setNombreComun(scan.nextLine());
 		System.out.println("introduce el nombre cientifico");
 		a.setNombreCientifico(scan.nextLine());
-		System.out.println("introduce el habitat");
-		a.setHabitat(scan.nextLine());
+		System.out.println("introduce el id habitat");
+		Habitat h = new Habitat();
+		h.setId(0);
 		System.out.println("introduce la altura");
 		a.setAltura(Integer.parseInt(scan.nextLine()));
 		System.out.println("introduce el origen");
 		a.setOrigen(scan.nextLine());
-		
+		a.setEncontrado(Date.valueOf(scan.nextLine()));
 		return a;
 	}
 
