@@ -1,6 +1,6 @@
 package clases;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Arbol {
 
@@ -10,11 +10,11 @@ public class Arbol {
 	private Habitat habitat;
 	private int altura;
 	private String origen;
-	private String encontrado;
+	private Date encontrado;
 	private Boolean singular;
 	
 	public Arbol(int id, String nombreComun, String nombreCientifico, Habitat habitat, int altura, String origen,
-			String encontrado, Boolean singular) {
+			Date encontrado, Boolean singular) {
 		super();
 		this.id = id;
 		this.nombreComun = nombreComun;
@@ -54,7 +54,7 @@ public class Arbol {
 		this.origen = origen;
 	}
 	
-	public void setEncontrado(String encontrado) {
+	public void setEncontrado(Date encontrado) {
 		this.encontrado = encontrado;
 	}
 
@@ -89,7 +89,7 @@ public class Arbol {
 		return origen;
 	}
 	
-	public String getEncontrado() {
+	public Date getEncontrado() {
 		return encontrado;
 	}
 

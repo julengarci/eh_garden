@@ -1,11 +1,13 @@
 package main;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,16 +82,16 @@ public class GestorArboles {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden2","root","");
 			
-			Statement st = conexion.createStatement();
 			String sql = "DELETE FROM arboles WHERE id = ?";
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
 			
 			ps.setInt(1,Integer.parseInt(scan.nextLine()));
 			
-			st.execute(sql);
+			ps.execute();
+			conexion.close();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -137,13 +139,14 @@ public class GestorArboles {
 		a.setNombreComun(scan.nextLine());
 		System.out.println("introduce el nombre cientifico");
 		a.setNombreCientifico(scan.nextLine());
-		System.out.println("introduce el habitat");
-		a.setHabitat(scan.nextLine());
+		System.out.println("introduce el id habitat");
+		Habitat h = new Habitat();
+		h.setId(0);
 		System.out.println("introduce la altura");
 		a.setAltura(Integer.parseInt(scan.nextLine()));
 		System.out.println("introduce el origen");
 		a.setOrigen(scan.nextLine());
-		
+		a.setEncontrado(Date.valueOf(scan.nextLine()));
 		return a;
 	}
 
@@ -177,7 +180,7 @@ public class GestorArboles {
 				a.setNombreCientifico(rs.getString(3));
 				a.setAltura(rs.getInt(5));
 				a.setOrigen(rs.getString(6));
-				a.setEncontrado(rs.getString(7));
+				a.setEncontrado(rs.getDate(7));
 				a.setSingular(rs.getBoolean(8));
 				
 				Habitat h = new Habitat();
