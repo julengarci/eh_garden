@@ -61,6 +61,7 @@ public class GestorArboles {
 			case DELETE:
 				//metodo que pida id y devuelva el arbol si existe
 				//metodo que conecta a la base de datos y elimina
+				visualizarArboles(arboles());
 				delete();
 				break;
 				
