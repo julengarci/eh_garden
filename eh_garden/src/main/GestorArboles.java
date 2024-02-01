@@ -59,7 +59,7 @@ public class GestorArboles {
 			case DELETE:
 				//metodo que pida id y devuelva el arbol si existe
 				//metodo que conecta a la base de datos y elimina
-				delete(buscarUno());
+				delete();
 				break;
 				
 			case SALIR:
@@ -73,36 +73,28 @@ public class GestorArboles {
 
 	}
 
-	private static Arbol buscarUno() {
-		Arbol a = new Arbol();
-		
-		
-		return a;
-	}
-
-	private static void delete(Arbol arbol) {
+	private static void delete() {
 		
 		Scanner scan = new Scanner(System.in);
-		
+		System.out.println("introduce el id para eliminar: ");
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/gestor_tareas","root","");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/eh_garden","root","");
 			
 			Statement st = conexion.createStatement();
 			String sql = "DELETE FROM arboles WHERE id = ?";
 			
 			PreparedStatement ps = conexion.prepareStatement(sql);
+			
 			ps.setInt(1,Integer.parseInt(scan.nextLine()));
 			
 			st.execute(sql);
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		}
 	}
 
